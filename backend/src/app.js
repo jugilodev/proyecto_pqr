@@ -2,6 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { pool } from './config/db.js';
+import pqrRoutes from './routes/pqr.routes.js';
+import tipoPeticionRoutes from './routes/tipoPeticion.routes.js';
+import canalRoutes from './routes/canal.routes.js';
+
 
 dotenv.config();
 
@@ -21,6 +25,15 @@ async function connectToDatabase() {
 }
 
 connectToDatabase();
+
+//RUTAS
+app.use('/api/pqrs', pqrRoutes);
+app.use('/api/tipo-peticion', tipoPeticionRoutes);
+app.use('/api/canales', canalRoutes);
+
+app.get('/', (req, res) => {
+    res.send('Welcome to the PQR API');
+});
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
