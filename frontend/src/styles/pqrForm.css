@@ -1,0 +1,115 @@
+.pqr-container {
+    min-height: 100vh;
+    background: #f5f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.pqr-card {
+    width: 100%;
+    max-width: 650px;
+    background: white;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.pqr-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #003c8f;
+}
+
+.pqr-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.pqr-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.pqr-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #003c8f;
+}
+
+.pqr-group input,
+.pqr-group select,
+.pqr-group textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+}
+
+.pqr-group input:focus,
+.pqr-group select:focus,
+.pqr-group textarea:focus {
+    outline: none;
+    border-color: #003c8f;
+}
+
+.pqr-button {
+    margin-top: 10px;
+    padding: 12px;
+    background: #ffcc00;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pqr-button:hover {
+    background: #e6b800;
+}
+
+.label-tooltip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tooltip-icon {
+    position: relative;
+    background: #ccc;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 180px;
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.tooltip-icon:hover .tooltip-text {
+    visibility: visible;
+}
+
+@media (max-width: 600px) {
+    .pqr-card {
+        padding: 25px;
+    }
+}
