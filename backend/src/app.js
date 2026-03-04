@@ -2,9 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { pool } from './config/db.js';
+
+// Importar rutas
 import pqrRoutes from './routes/pqr.routes.js';
 import tipoPeticionRoutes from './routes/tipoPeticion.routes.js';
 import canalRoutes from './routes/canal.routes.js';
+import municipioRoutes from './routes/municipio.routes.js';
 
 
 dotenv.config();
@@ -30,6 +33,7 @@ connectToDatabase();
 app.use('/api/pqrs', pqrRoutes);
 app.use('/api/tipo-peticion', tipoPeticionRoutes);
 app.use('/api/canales', canalRoutes);
+app.use('/api/municipios', municipioRoutes);
 
 app.get('/', (req, res) => {
     res.send('Welcome to the PQR API');
