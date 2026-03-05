@@ -10,17 +10,15 @@ function PqrForm() {
     const [formData, setFormData] = useState({
         nombre: "",
         apellido: "",
+        direccion: "",
         correo: "",
         celular: "",
-        tipo_requerimiento_id: "",
+        id_tipo_peticion: "",
         fecha_evento: "",
         id_municipio: "",
-        vendedor_nombre: "",
-        vendedor_cédula: "",
-        vendedor_celular: "",
         descripcion: "",
         id_canal: "",
-        autorizacion_datos: false
+        acepta_terminos: false
     });
 
     useEffect(() => {
@@ -80,8 +78,7 @@ function PqrForm() {
         });
 
         // Si cambia el tipo de requerimiento
-        if (name === "tipo_requerimiento_id") {
-
+        if (name === "id_tipo_peticion") {
             const tipoSeleccionado = tipos.find(
                 (tipo) => tipo.id_tipo_peticion == value
             );
@@ -161,26 +158,15 @@ function PqrForm() {
                     </div>
 
                     <div className="pqr-group">
-                        <label>Correo electrónico</label>
+                        <label>Dirección</label>
                         <input
-                            type="email"
-                            name="correo"
-                            value={formData.correo}
+                            name="direccion"
+                            value={formData.direccion}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    <div className="pqr-group">
-                        <label>Celular</label>
-                        <input
-                            type="tel"
-                            name="celular"
-                            value={formData.celular}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
 
                     <div className="pqr-group">
 
@@ -197,8 +183,8 @@ function PqrForm() {
                         </label>
 
                         <select
-                            name="tipo_requerimiento_id"
-                            value={formData.tipo_requerimiento_id}
+                            name="id_tipo_peticion"
+                            value={formData.id_tipo_peticion}
                             onChange={handleChange}
                             required
                         >
@@ -209,7 +195,6 @@ function PqrForm() {
                                     {tipo.tipo_peticion}
                                 </option>
                             ))}
-
                         </select>
                     </div>
 
@@ -335,9 +320,9 @@ function PqrForm() {
 
                 </form>
 
-            </div>
+            </div >
 
-        </div>
+        </div >
     );
 }
 
