@@ -5,8 +5,13 @@ function PqrForm() {
 
     const [tipos, setTipos] = useState([]);
     const [canales, setCanales] = useState([]);
-    const [descripcionTipo, setDescripcionTipo] = useState("");
     const [municipios, setMunicipios] = useState([]);
+    const [descripcionTipo, setDescripcionTipo] = useState("");
+
+    const [radicado, setRadicado] = useState(null);
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [enviando, setEnviando] = useState(false);
+
     const [formData, setFormData] = useState({
         nombre: "",
         apellido: "",
@@ -22,7 +27,6 @@ function PqrForm() {
     });
 
     useEffect(() => {
-
         const obtenerTipos = async () => {
             try {
                 const response = await fetch("http://localhost:3000/api/tipo-peticion");
@@ -32,9 +36,7 @@ function PqrForm() {
                 console.error("Error cargando tipos:", error);
             }
         };
-
         obtenerTipos();
-
     }, []);
 
     useEffect(() => {
@@ -47,9 +49,7 @@ function PqrForm() {
                 console.error("Error cargando canales:", error);
             }
         };
-
         obtenerCanales();
-
     }, []);
 
     useEffect(() => {
@@ -62,11 +62,8 @@ function PqrForm() {
                 console.error("Error cargando municipios:", error);
             }
         };
-
         obtenerMunicipios();
-
     }, []);
-
 
     const handleChange = (e) => {
 
@@ -77,7 +74,6 @@ function PqrForm() {
             [name]: type === "checkbox" ? checked : value
         });
 
-        // Si cambia el tipo de requerimiento
         if (name === "id_tipo_peticion") {
             const tipoSeleccionado = tipos.find(
                 (tipo) => tipo.id_tipo_peticion == value
@@ -92,39 +88,67 @@ function PqrForm() {
     };
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
 
+        if (new Date(formData.fecha_evento) > new Date()) {
+            alert("La fecha del evento no puede ser futura");
+            return;
+        }
+
+        setEnviando(true);
+
         try {
+
+            const payload = {
+                ...formData,
+                id_tipo_peticion: Number(formData.id_tipo_peticion),
+                id_canal: Number(formData.id_canal),
+                id_municipio: Number(formData.id_municipio)
+            };
 
             const response = await fetch("http://localhost:3000/api/pqrs", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(payload)
             });
 
+            const data = await response.json();
+
             if (!response.ok) {
-                throw new Error("Error enviando PQR");
+                throw new Error(data.message || "Error enviando PQR");
             }
 
-            alert("PQR enviada correctamente");
+            setRadicado(data.radicado);
+            setMostrarModal(true);
 
             setFormData({
                 nombre: "",
                 apellido: "",
+                direccion: "",
                 correo: "",
                 celular: "",
-                tipo_requerimiento_id: "",
+                id_tipo_peticion: "",
+                fecha_evento: "",
+                id_municipio: "",
                 descripcion: "",
-                id_canal: ""
+                id_canal: "",
+                acepta_terminos: false
             });
 
             setDescripcionTipo("");
 
         } catch (error) {
+
             console.error(error);
-            alert("Error enviando la PQR");
+            alert(error.message);
+
+        } finally {
+
+            setEnviando(false);
+
         }
     };
 
@@ -167,6 +191,27 @@ function PqrForm() {
                         />
                     </div>
 
+                    <div className="pqr-group">
+                        <label>Correo electrónico</label>
+                        <input
+                            name="correo"
+                            type="email"
+                            value={formData.correo}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="pqr-group">
+                        <label>Celular</label>
+                        <input
+                            name="celular"
+                            type="tel"
+                            value={formData.celular}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
 
                     <div className="pqr-group">
 
@@ -249,39 +294,6 @@ function PqrForm() {
                         />
                     </div>
 
-                    <div className="pqr-vendedor">
-
-                        <h3>Información del vendedor (Opcional)</h3>
-
-                        <div className="pqr-group">
-                            <label>Cédula del vendedor</label>
-                            <input
-                                name="vendedor_cédula"
-                                value={formData.vendedor_cédula || ""}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                        <div className="pqr-group">
-                            <label>Nombre del vendedor</label>
-                            <input
-                                name="vendedor_nombre"
-                                value={formData.vendedor_nombre || ""}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                        <div className="pqr-group">
-                            <label>Celular del vendedor</label>
-                            <input
-                                name="vendedor_celular"
-                                value={formData.vendedor_celular || ""}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                    </div>
-
                     <div className="pqr-group">
                         <label>Descripción</label>
                         <textarea
@@ -293,19 +305,17 @@ function PqrForm() {
                         />
                     </div>
 
-
-
                     <div className="pqr-legal">
 
                         <p>
-                            De acuerdo con la ley 1581 de 2012, sus normas concordantes y reglamentarias, declaro que soy mayor de edad y soy consciente que debo presentar evidencia o soporte en caso de ser requerido para realizar este trámite. En forma previa, libre, voluntaria, informada, expresa, y debidamente prevenido(a) sobre mis derechos como titular, autorizo a SUSUERTE S.A para recolectar, almacenar, dar tratamiento, actualizar, disponer, transmitir y transferir, mis datos personales, mi imagen y documentos adjuntos propios y de terceros, de los cuales tengo autorización; que se incorporarán en sus bases de datos, para gestionar y tramitar PQRSF (durante y después); contactarme para realizar encuestas, calificación y consultas; ofrecerme servicios en general; remitir información comercial y de marketing; y para todos los fines legales pertinentes. Sé que cuando me pregunten por datos sensibles o de menores de edad, tengo la facultad de dar o no respuesta. Tengo derecho a conocer, actualizar, rectificar y suprimir mis datos, a la cuenta de correo electrónico servicioalcliente@susuerte.com, o la dirección Carrera 23C No. 64 – 32 Manizales – Caldas, también conozco que puedo consultar el Manual de Políticas de Tratamiento de Datos Personales en la página web www.susuerte.com
+                            Autorizo el tratamiento de mis datos personales conforme a la ley 1581 de 2012.
                         </p>
 
                         <label className="pqr-checkbox">
                             <input
                                 type="checkbox"
-                                name="autorizacion_datos"
-                                checked={formData.autorizacion_datos}
+                                name="acepta_terminos"
+                                checked={formData.acepta_terminos}
                                 onChange={handleChange}
                                 required
                             />
@@ -314,15 +324,42 @@ function PqrForm() {
 
                     </div>
 
-                    <button className="pqr-button">
-                        Enviar solicitud
+                    <button className="pqr-button" disabled={enviando}>
+                        {enviando ? "Enviando..." : "Enviar solicitud"}
                     </button>
 
                 </form>
 
-            </div >
+                {mostrarModal && (
+                    <div className="modal-overlay">
 
-        </div >
+                        <div className="modal">
+
+                            <h2>Solicitud enviada correctamente</h2>
+
+                            <p>Su número de radicado es:</p>
+
+                            <h1>{radicado}</h1>
+
+                            <button onClick={() => navigator.clipboard.writeText(radicado)}>
+                                Copiar radicado
+                            </button>
+
+                            <button onClick={() => {
+                                setMostrarModal(false);
+                                window.scrollTo(0, 0);
+                            }}>
+                                Cerrar
+                            </button>
+
+                        </div>
+
+                    </div>
+                )}
+
+            </div>
+
+        </div>
     );
 }
 

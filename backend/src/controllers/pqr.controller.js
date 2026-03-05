@@ -49,7 +49,7 @@ export const createPqr = async (req, res) => {
             id_cliente = nuevoCliente.rows[0].id_cliente;
         }
 
-        const radicado = generarRadicado();
+        const radicado = await generarRadicado();
 
         const nuevaPqr = await client.query(
             `
@@ -105,3 +105,36 @@ export const createPqr = async (req, res) => {
 
     }
 };
+
+export const getPqrs = async (resq, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT 
+                p.radicado,
+                p.fecha_reporte,
+                p.fecha_evento,
+                p.descripcion,
+                p.acepta_terminos,
+                c.nombre AS nombre_cliente,
+                c.apellido AS apellido_cliente,
+                c.direccion AS direccion_cliente,
+                c.correo AS correo_cliente,
+                c.celular AS celular_cliente,
+                tp.nombre AS tipo_peticion,
+                e.nombre AS estado,
+                ca.nombre AS canal,
+                m.nombre AS municipio
+            FROM pqr p
+            JOIN cliente c ON p.id_cliente = c.id_cliente
+            JOIN tipo_peticion tp ON p.id_tipo_peticion = tp.id_tipo_peticion
+            JOIN estado e ON p.id_estado = e.id_estado
+            JOIN canal ca ON p.id_canal = ca.id_canal
+            JOIN municipio m ON p.id_municipio = m.id_municipio
+            ORDER BY p.fecha_reporte DESC
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error obteniendo PQRs' });
+    }
+}

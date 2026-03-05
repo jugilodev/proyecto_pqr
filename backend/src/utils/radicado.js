@@ -1,4 +1,4 @@
-import { pool } from '../db.js';
+import { pool } from '../config/db.js';
 
 const generarNumero = () => {
     const numero = Math.floor(Math.random() * 900000) + 100000; // Genera un número aleatorio de 6 dígitos
