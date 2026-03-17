@@ -1,0 +1,447 @@
+/* ─── Layout ──────────────────────────────────────────────── */
+.layout {
+  min-height: 100svh;
+  background: #f0f4f8;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ─── Navbar back button ──────────────────────────────────── */
+.backBtn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.backBtn:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* ─── Main ────────────────────────────────────────────────── */
+.main {
+  padding: 28px 32px 88px; /* bottom extra para el BottomBar */
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ─── PQR Header ──────────────────────────────────────────── */
+.pqrHeader {
+  background: #1a3a6b;
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pqrHeaderLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radicadoLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(245, 200, 0, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.radicado {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 26px;
+  font-weight: 700;
+  color: #f5c800;
+  letter-spacing: -0.5px;
+}
+
+.estadoBadge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.pqrMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  flex-wrap: wrap;
+  align-self: flex-end;
+}
+
+/* ─── Grid de dos columnas ────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+.colLeft, .colRight {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ─── Card genérica ───────────────────────────────────────── */
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a3a6b;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f5c800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardHint {
+  font-size: 13px;
+  color: #6b7280;
+  margin: -8px 0 16px;
+  line-height: 1.5;
+}
+
+.bitacoraCount {
+  background: #1a3a6b;
+  color: #f5c800;
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ─── Info grid (datos del cliente) ───────────────────────── */
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.infoItem {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.infoLabel {
+  width: 100px;
+  flex-shrink: 0;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.infoValue {
+  color: #111827;
+  flex: 1;
+  word-break: break-word;
+}
+
+/* ─── Descripción del caso ────────────────────────────────── */
+.descripcion {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ─── Formularios ─────────────────────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.select, .textarea, .textareaLarge {
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 14px;
+  color: #111827;
+  background: #f9fafb;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.select:focus, .textarea:focus, .textareaLarge:focus {
+  border-color: #1a3a6b;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(26, 58, 107, 0.1);
+}
+
+.textarea { resize: vertical; }
+
+/* textarea grande para pegar correos completos */
+.textareaLarge {
+  resize: vertical;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.submitBtn {
+  background: #1a3a6b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+
+.submitBtn:hover { background: #1e4d8c; }
+
+.submitBtn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* ─── Mensajes de feedback ────────────────────────────────── */
+.successMsg {
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.errorMsg {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+/* ─── Timeline de bitácora ────────────────────────────────── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.timelineItem:last-child { padding-bottom: 0; }
+
+.timelineDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #1a3a6b;
+  border: 2px solid #f5c800;
+  flex-shrink: 0;
+  margin-top: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.timelineLine {
+  position: absolute;
+  left: 5px;
+  top: 16px;
+  bottom: 0;
+  width: 2px;
+  background: #e5e7eb;
+}
+
+.timelineContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timelineHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.timelineEvento {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a3a6b;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  padding: 3px 10px;
+}
+
+.timelineFecha {
+  font-size: 12px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+/* Cambio de estado en la bitácora */
+.timelineEstados {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.estadoAnterior {
+  background: #f3f4f6;
+  color: #374151;
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.estadoArrow {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.estadoNuevo {
+  background: #dcfce7;
+  color: #15803d;
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Descripción (correo, nota) */
+.timelineDesc {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+/* Autor */
+.timelineAutor {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.timelineRol {
+  font-weight: 400;
+}
+
+.bitacoraEmpty {
+  text-align: center;
+  padding: 32px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* ─── Loading / Error ─────────────────────────────────────── */
+.stateBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 0;
+  color: #6b7280;
+  font-family: system-ui, sans-serif;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #1a3a6b;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.errorBox {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 32px;
+  font-size: 14px;
+  text-align: center;
+  font-family: system-ui, sans-serif;
+}
+
+@media (max-width: 768px) {
+  .main { padding: 16px; }
+  .formRow { grid-template-columns: 1fr; }
+}

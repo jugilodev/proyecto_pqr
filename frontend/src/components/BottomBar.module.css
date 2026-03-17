@@ -1,0 +1,105 @@
+/* ── Barra fija en la parte inferior ── */
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: #1a3a6b;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  padding: 0 20px;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
+  z-index: 150;
+  border-top: 2px solid #f5c800;
+}
+
+/* ── Botón de opción ── */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+.item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Opción activa */
+.active {
+  background: rgba(245, 200, 0, 0.15);
+  border-color: #f5c800;
+  color: #f5c800;
+}
+
+.active:hover {
+  background: rgba(245, 200, 0, 0.22);
+  color: #f5c800;
+}
+
+/* ── Info del usuario (lado derecho) ── */
+.userItem {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f5c800;
+  color: #1a3a6b;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.userRole {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: capitalize;
+}
+
+/* En pantallas pequeñas ocultar texto y mostrar solo iconos */
+@media (max-width: 480px) {
+  .item span { display: none; }
+  .item { padding: 8px 12px; }
+  .userName { display: none; }
+}
