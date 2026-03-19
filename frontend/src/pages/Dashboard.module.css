@@ -9,7 +9,8 @@
 
 /* ─── Main ────────────────────────────────────────────────── */
 .main {
-  padding: 28px 32px 88px; /* bottom extra para no quedar tapado por el BottomBar */
+  padding: 28px 32px 88px;
+  /* bottom extra para no quedar tapado por el BottomBar */
   flex: 1;
   max-width: 1700px;
   width: 100%;
@@ -68,7 +69,9 @@
   transition: background 0.15s;
 }
 
-.clearBtn:hover { background: #ffedd5; }
+.clearBtn:hover {
+  background: #ffedd5;
+}
 
 /* ─── Stats ───────────────────────────────────────────────── */
 .statsRow {
@@ -160,7 +163,9 @@
   white-space: nowrap;
 }
 
-.sortBtn:hover { color: #ffffff; }
+.sortBtn:hover {
+  color: #ffffff;
+}
 
 /* Fila de filtros */
 .filterRow {
@@ -191,7 +196,9 @@
   box-shadow: 0 0 0 2px rgba(245, 200, 0, 0.25);
 }
 
-.fi::placeholder { color: #9ca3af; }
+.fi::placeholder {
+  color: #9ca3af;
+}
 
 /* ─── Badge de días de vencimiento ───────────────────────── */
 .vencimientoBadge {
@@ -206,7 +213,8 @@
 
 /* ─── Header de columnas de fecha ────────────────────────── */
 .dateHeaderTh {
-  position: relative;   /* ancla el popover */
+  position: relative;
+  /* ancla el popover */
 }
 
 .dateHeaderInner {
@@ -269,8 +277,15 @@
 }
 
 @keyframes popIn {
-  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .popoverTitle {
@@ -341,9 +356,13 @@
   transition: background 0.12s;
 }
 
-.table tbody tr:last-child { border-bottom: none; }
+.table tbody tr:last-child {
+  border-bottom: none;
+}
 
-.row:hover { background: #f8fafc; }
+.row:hover {
+  background: #f8fafc;
+}
 
 .table td {
   padding: 12px 10px;
@@ -419,7 +438,9 @@
   transition: background 0.15s;
 }
 
-.editBtn:hover { background: #1e4d8c; }
+.editBtn:hover {
+  background: #1e4d8c;
+}
 
 .emptyRow {
   text-align: center;
@@ -448,7 +469,11 @@
   animation: spin 0.8s linear infinite;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 .errorBox {
   background: #fef2f2;
@@ -461,7 +486,66 @@
 }
 
 /* ─── Responsive ──────────────────────────────────────────── */
+.paginationBar {
+  margin: 10px 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.paginationInfo {
+  font-size: 12px;
+  color: #374151;
+  font-weight: 600;
+}
+
+.paginationActions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.pageBtn {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #111827;
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: #eff6ff;
+  border-color: #a5b4fc;
+}
+
+.pageBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.activePageBtn {
+  background: #1a3a6b;
+  color: #fff;
+  border-color: #1a3a6b;
+}
+
 @media (max-width: 768px) {
-  .main { padding: 16px; }
-  .pageTitle { font-size: 20px; }
+  .main {
+    padding: 16px;
+  }
+
+  .pageTitle {
+    font-size: 20px;
+  }
 }

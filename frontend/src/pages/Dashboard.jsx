@@ -56,6 +56,7 @@ const INIT_FILTERS = {
     fecha_reporte_desde: "", fecha_reporte_hasta: "",
     fecha_evento_desde: "", fecha_evento_hasta: "",
 }
+const PAGE_SIZE = 10
 
 export default function Dashboard() {
     const { user } = useAuth()
@@ -64,6 +65,7 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
     const [filters, setFilters] = useState(INIT_FILTERS)
+    const [currentPage, setCurrentPage] = useState(1)
     const [sort, setSort] = useState({ column: null, direction: "asc" })
     const [selectedPqr, setSelectedPqr] = useState(null)    // PQR en el modal de detalle
     const [showCreateUser, setShowCreateUser] = useState(false)   // Modal crear usuario
@@ -84,8 +86,10 @@ export default function Dashboard() {
     }
 
     /* ── Actualizar un filtro individual ── */
-    const setFilter = (key, value) =>
+    const setFilter = (key, value) => {
         setFilters(prev => ({ ...prev, [key]: value }))
+        setCurrentPage(1)
+    }
 
     /* ── Toggle de ordenamiento por fecha ── */
     function toggleSort(column) {
@@ -169,7 +173,17 @@ export default function Dashboard() {
         return lista
     }, [pqrs, filters, sort])
 
+    const totalPages = Math.max(1, Math.ceil(filtradas.length / PAGE_SIZE))
+    const currentPageSafe = Math.min(currentPage, totalPages)
+    const paginadas = filtradas.slice((currentPageSafe - 1) * PAGE_SIZE, currentPageSafe * PAGE_SIZE)
+
     const hayFiltros = Object.values(filters).some(v => v !== "")
+
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages)
+        }
+    }, [currentPage, totalPages])
 
     return (
         <div className={styles.layout}>
@@ -394,7 +408,7 @@ export default function Dashboard() {
                                         </td>
                                     </tr>
                                 ) : (
-                                    filtradas.map(pqr => {
+                                    paginadas.map(pqr => {
                                         const st = estadoStyle(pqr.tipo_estado)
                                         return (
                                             <tr key={pqr.id_pqr} className={styles.row}>
@@ -458,6 +472,37 @@ export default function Dashboard() {
                                 )}
                             </tbody>
                         </table>
+
+                        <div className={styles.paginationBar}>
+                            <div className={styles.paginationInfo}>
+                                Mostrando {filtradas.length === 0 ? 0 : (currentPageSafe - 1) * PAGE_SIZE + 1} - {Math.min(currentPageSafe * PAGE_SIZE, filtradas.length)} de {filtradas.length}
+                            </div>
+
+                            <div className={styles.paginationActions}>
+                                <button
+                                    className={styles.pageBtn}
+                                    disabled={currentPageSafe <= 1}
+                                    onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                >Anterior</button>
+
+                                {[...Array(totalPages)].map((_, i) => {
+                                    const page = i + 1
+                                    return (
+                                        <button
+                                            key={page}
+                                            className={`${styles.pageBtn} ${currentPageSafe === page ? styles.activePageBtn : ""}`}
+                                            onClick={() => setCurrentPage(page)}
+                                        >{page}</button>
+                                    )
+                                })}
+
+                                <button
+                                    className={styles.pageBtn}
+                                    disabled={currentPageSafe >= totalPages}
+                                    onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                >Siguiente</button>
+                            </div>
+                        </div>
                     </div>
                 )}
             </main>
