@@ -4,7 +4,7 @@
   background: #f0f4f8;
   display: flex;
   flex-direction: column;
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 /* ─── Navbar back button ──────────────────────────────────── */
@@ -12,20 +12,23 @@
   background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  border-radius: 9px;
   padding: 7px 14px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, border-color 0.15s;
   white-space: nowrap;
 }
 
-.backBtn:hover { background: rgba(255, 255, 255, 0.2); }
+.backBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
 
 /* ─── Main ────────────────────────────────────────────────── */
 .main {
-  padding: 28px 32px 88px; /* bottom extra para el BottomBar */
+  padding: 28px 32px 96px;
   flex: 1;
   max-width: 1400px;
   width: 100%;
@@ -35,15 +38,16 @@
 
 /* ─── PQR Header ──────────────────────────────────────────── */
 .pqrHeader {
-  background: #1a3a6b;
-  border-radius: 14px;
-  padding: 24px 28px;
+  background: linear-gradient(135deg, #27348b 0%, #1f2970 100%);
+  border-radius: 16px;
+  padding: 26px 30px;
   margin-bottom: 24px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+  box-shadow: 0 8px 32px rgba(39, 52, 139, 0.25);
 }
 
 .pqrHeaderLeft {
@@ -53,16 +57,16 @@
 }
 
 .radicadoLabel {
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(245, 200, 0, 0.7);
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(245, 200, 0, 0.65);
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 1.2px;
 }
 
 .radicado {
   font-family: ui-monospace, Consolas, monospace;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   color: #f5c800;
   letter-spacing: -0.5px;
@@ -72,8 +76,8 @@
   display: inline-block;
   padding: 5px 14px;
   border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 700;
   width: fit-content;
 }
 
@@ -81,10 +85,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13.5px;
   flex-wrap: wrap;
   align-self: flex-end;
+  font-weight: 400;
 }
 
 /* ─── Grid de dos columnas ────────────────────────────────── */
@@ -102,46 +107,49 @@
 .colLeft, .colRight {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 /* ─── Card genérica ───────────────────────────────────────── */
 .card {
   background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
   padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .cardTitle {
-  font-size: 15px;
-  font-weight: 700;
-  color: #1a3a6b;
+  font-size: 14px;
+  font-weight: 800;
+  color: #27348b;
   margin: 0 0 16px;
-  padding-bottom: 10px;
+  padding-bottom: 11px;
   border-bottom: 2px solid #f5c800;
   display: flex;
   align-items: center;
   gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .cardHint {
   font-size: 13px;
   color: #6b7280;
   margin: -8px 0 16px;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .bitacoraCount {
-  background: #1a3a6b;
+  background: #27348b;
   color: #f5c800;
   border-radius: 20px;
   padding: 2px 10px;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11.5px;
+  font-weight: 800;
 }
 
-/* ─── Info grid (datos del cliente) ───────────────────────── */
+/* ─── Info grid ───────────────────────────────────────────── */
 .infoGrid {
   display: flex;
   flex-direction: column;
@@ -151,31 +159,36 @@
 .infoItem {
   display: flex;
   gap: 12px;
-  font-size: 14px;
+  font-size: 13.5px;
 }
 
 .infoLabel {
   width: 100px;
   flex-shrink: 0;
-  color: #6b7280;
-  font-weight: 500;
+  color: #9ca3af;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding-top: 1px;
 }
 
 .infoValue {
   color: #111827;
   flex: 1;
   word-break: break-word;
+  font-weight: 500;
 }
 
 /* ─── Descripción del caso ────────────────────────────────── */
 .descripcion {
   background: #f8fafc;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 14px 16px;
-  font-size: 14px;
+  font-size: 13.5px;
   color: #374151;
-  line-height: 1.6;
+  line-height: 1.65;
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -200,34 +213,35 @@
 }
 
 .label {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 
 .select, .textarea, .textareaLarge {
-  border: 1.5px solid #d1d5db;
-  border-radius: 8px;
-  padding: 9px 12px;
-  font-size: 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 9px;
+  padding: 10px 12px;
+  font-size: 13.5px;
   color: #111827;
   background: #f9fafb;
   outline: none;
-  font-family: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   width: 100%;
   box-sizing: border-box;
 }
 
 .select:focus, .textarea:focus, .textareaLarge:focus {
-  border-color: #1a3a6b;
+  border-color: #27348b;
   background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(26, 58, 107, 0.1);
+  box-shadow: 0 0 0 3px rgba(39, 52, 139, 0.08);
 }
 
 .textarea { resize: vertical; }
 
-/* textarea grande para pegar correos completos */
 .textareaLarge {
   resize: vertical;
   font-family: ui-monospace, Consolas, monospace;
@@ -236,43 +250,52 @@
 }
 
 .submitBtn {
-  background: #1a3a6b;
+  background: linear-gradient(135deg, #27348b, #1f2970);
   color: #ffffff;
   border: none;
-  border-radius: 8px;
+  border-radius: 9px;
   padding: 11px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13.5px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
   align-self: flex-start;
+  box-shadow: 0 3px 12px rgba(39, 52, 139, 0.28);
 }
 
-.submitBtn:hover { background: #1e4d8c; }
+.submitBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(39, 52, 139, 0.35);
+}
 
 .submitBtn:disabled {
   background: #9ca3af;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  opacity: 1;
 }
 
-/* ─── Mensajes de feedback ────────────────────────────────── */
+/* ─── Mensajes ────────────────────────────────────────────── */
 .successMsg {
-  background: #dcfce7;
+  background: #f0fdf4;
   border: 1px solid #bbf7d0;
   color: #15803d;
-  border-radius: 8px;
+  border-radius: 9px;
   padding: 10px 14px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .errorMsg {
   background: #fef2f2;
   border: 1px solid #fecaca;
   color: #dc2626;
-  border-radius: 8px;
+  border-radius: 9px;
   padding: 10px 14px;
   font-size: 13px;
+  font-weight: 500;
 }
 
 /* ─── Timeline de bitácora ────────────────────────────────── */
@@ -292,24 +315,25 @@
 .timelineItem:last-child { padding-bottom: 0; }
 
 .timelineDot {
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
-  background: #1a3a6b;
-  border: 2px solid #f5c800;
+  background: #27348b;
+  border: 2.5px solid #f5c800;
   flex-shrink: 0;
   margin-top: 4px;
   position: relative;
   z-index: 1;
+  box-shadow: 0 0 0 3px rgba(39, 52, 139, 0.1);
 }
 
 .timelineLine {
   position: absolute;
   left: 5px;
-  top: 16px;
+  top: 17px;
   bottom: 0;
   width: 2px;
-  background: #e5e7eb;
+  background: linear-gradient(to bottom, #e5e7eb, transparent);
 }
 
 .timelineContent {
@@ -328,22 +352,24 @@
 }
 
 .timelineEvento {
-  font-size: 13px;
-  font-weight: 700;
-  color: #1a3a6b;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #27348b;
+  background: #eef0fb;
+  border: 1px solid #c7ccf0;
+  border-radius: 7px;
   padding: 3px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .timelineFecha {
-  font-size: 12px;
+  font-size: 11.5px;
   color: #9ca3af;
   white-space: nowrap;
+  font-weight: 500;
 }
 
-/* Cambio de estado en la bitácora */
 .timelineEstados {
   display: flex;
   align-items: center;
@@ -353,11 +379,11 @@
 
 .estadoAnterior {
   background: #f3f4f6;
-  color: #374151;
+  color: #4b5563;
   border-radius: 12px;
   padding: 2px 10px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .estadoArrow {
@@ -366,33 +392,31 @@
 }
 
 .estadoNuevo {
-  background: #dcfce7;
+  background: #f0fdf4;
   color: #15803d;
   border-radius: 12px;
   padding: 2px 10px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-/* Descripción (correo, nota) */
 .timelineDesc {
   background: #f8fafc;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  border-radius: 9px;
   padding: 12px 14px;
   font-size: 13px;
   color: #374151;
-  line-height: 1.6;
+  line-height: 1.65;
   white-space: pre-wrap;
   word-break: break-word;
   font-family: ui-monospace, Consolas, monospace;
 }
 
-/* Autor */
 .timelineAutor {
-  font-size: 12px;
-  color: #6b7280;
-  font-weight: 500;
+  font-size: 11.5px;
+  color: #9ca3af;
+  font-weight: 600;
 }
 
 .timelineRol {
@@ -401,9 +425,10 @@
 
 .bitacoraEmpty {
   text-align: center;
-  padding: 32px 0;
+  padding: 40px 0;
   color: #9ca3af;
   font-size: 14px;
+  font-weight: 500;
 }
 
 /* ─── Loading / Error ─────────────────────────────────────── */
@@ -415,16 +440,15 @@
   gap: 16px;
   padding: 80px 0;
   color: #6b7280;
-  font-family: system-ui, sans-serif;
 }
 
 .spinner {
   width: 40px;
   height: 40px;
   border: 3px solid #e5e7eb;
-  border-top-color: #1a3a6b;
+  border-top-color: #27348b;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin 0.75s linear infinite;
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -433,12 +457,131 @@
   background: #fef2f2;
   border: 1px solid #fecaca;
   color: #dc2626;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 20px;
   margin: 32px;
   font-size: 14px;
   text-align: center;
-  font-family: system-ui, sans-serif;
+  font-weight: 500;
+}
+
+/* ─── Adjuntar archivos ───────────────────────────────────── */
+.fileInputLabel {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #f0f4f8;
+  border: 1.5px dashed #c4c9e0;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #27348b;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  width: fit-content;
+}
+
+.fileInputLabel:hover {
+  border-color: #27348b;
+  background: #eef0fb;
+}
+
+.fileInputHidden { display: none; }
+
+.fileHint {
+  font-size: 11.5px;
+  color: #9ca3af;
+  margin: 4px 0 0;
+  font-weight: 500;
+}
+
+.fileList {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.fileIcon { flex-shrink: 0; }
+
+.fileName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #374151;
+  font-weight: 500;
+}
+
+.fileRemove {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0 2px;
+  flex-shrink: 0;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.fileRemove:hover { color: #dc2626; }
+
+/* ─── Adjuntos en la timeline ─────────────────────────────── */
+.adjuntos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.adjuntoImgLink {
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  transition: opacity 0.15s;
+}
+
+.adjuntoImgLink:hover { opacity: 0.85; }
+
+.adjuntoImg {
+  display: block;
+  max-width: 180px;
+  max-height: 120px;
+  object-fit: cover;
+}
+
+.adjuntoDoc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eef0fb;
+  border: 1px solid #c7ccf0;
+  border-radius: 8px;
+  padding: 5px 11px;
+  font-size: 12.5px;
+  color: #27348b;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.adjuntoDoc:hover {
+  background: #dde0f7;
+  border-color: #a5abdf;
 }
 
 @media (max-width: 768px) {

@@ -40,6 +40,7 @@ export default function PQRForm() {
 
     /* ── Estado del formulario ── */
     const [form,         setForm]         = useState(getInitialForm)
+    const [archivos,     setArchivos]     = useState([])
     const [enviando,     setEnviando]      = useState(false)
     const [error,        setError]         = useState("")
     const [radicadoOk,   setRadicadoOk]    = useState(null)  // radicado confirmado → abre modal
@@ -74,12 +75,16 @@ export default function PQRForm() {
 
         setEnviando(true)
         try {
-            const res = await api.post("/api/pqr/public", {
-                ...form,
-                id_canal:         parseInt(form.id_canal),
-                id_tipo_peticion: parseInt(form.id_tipo_peticion),
-                id_municipio:     form.id_municipio ? parseInt(form.id_municipio) : null,
-                acepta_terminos:  true,
+            const formData = new FormData()
+            Object.entries(form).forEach(([k, v]) => formData.append(k, v))
+            formData.set("id_canal",         parseInt(form.id_canal))
+            formData.set("id_tipo_peticion", parseInt(form.id_tipo_peticion))
+            formData.set("id_municipio",     form.id_municipio ? parseInt(form.id_municipio) : "")
+            formData.set("acepta_terminos",  true)
+            archivos.forEach(a => formData.append("archivos", a))
+
+            const res = await api.post("/api/pqr/public", formData, {
+                headers: { "Content-Type": "multipart/form-data" },
             })
             setRadicadoOk(res.data.radicado)
 
@@ -118,10 +123,13 @@ export default function PQRForm() {
         }
     }
 
+    const quitarArchivo = (i) => setArchivos(prev => prev.filter((_, idx) => idx !== i))
+
     /* ── Cerrar modal y resetear formulario ── */
     const handleCerrarModal = () => {
         setRadicadoOk(null)
         setForm(getInitialForm())
+        setArchivos([])
     }
 
     return (
@@ -276,6 +284,31 @@ export default function PQRForm() {
                                 placeholder="Describa detalladamente su petición, queja, reclamo, sugerencia o felicitación..."
                                 value={form.descripcion}
                                 onChange={e => setField("descripcion", e.target.value)} />
+                        </div>
+                        <div className={styles.field} style={{ marginTop: "16px" }}>
+                            <label className={styles.label}>Documentos de soporte <span style={{ fontWeight: 400, color: "#9ca3af" }}>(opcional)</span></label>
+                            <label className={styles.fileInputLabel}>
+                                <input
+                                    type="file"
+                                    multiple
+                                    accept="image/*,.pdf,.doc,.docx"
+                                    className={styles.fileInputHidden}
+                                    onChange={e => setArchivos(prev => [...prev, ...Array.from(e.target.files)])}
+                                />
+                                Adjuntar archivos
+                            </label>
+                            <p className={styles.fileHint}>Imágenes, PDF o Word · Máx. 10 MB por archivo · Máx. 5 archivos</p>
+                            {archivos.length > 0 && (
+                                <ul className={styles.fileList}>
+                                    {archivos.map((f, i) => (
+                                        <li key={i} className={styles.fileItem}>
+                                            <span>{f.type.startsWith("image/") ? "🖼" : "📄"}</span>
+                                            <span className={styles.fileName}>{f.name}</span>
+                                            <button type="button" className={styles.fileRemove} onClick={() => quitarArchivo(i)}>✕</button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </div>
 

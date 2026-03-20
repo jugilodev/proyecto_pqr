@@ -4,13 +4,12 @@
   background: #f0f4f8;
   display: flex;
   flex-direction: column;
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 /* ─── Main ────────────────────────────────────────────────── */
 .main {
   padding: 28px 32px 88px;
-  /* bottom extra para no quedar tapado por el BottomBar */
   flex: 1;
   max-width: 1700px;
   width: 100%;
@@ -23,22 +22,23 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   gap: 16px;
 }
 
 .pageTitle {
   font-size: 24px;
-  font-weight: 700;
-  color: #1a3a6b;
-  margin: 0 0 4px;
-  letter-spacing: -0.4px;
+  font-weight: 800;
+  color: #27348b;
+  margin: 0 0 3px;
+  letter-spacing: -0.5px;
 }
 
 .pageDesc {
-  font-size: 14px;
+  font-size: 13.5px;
   color: #6b7280;
   margin: 0;
+  font-weight: 400;
 }
 
 .headerRight {
@@ -48,23 +48,24 @@
 }
 
 .countBadge {
-  background: #1a3a6b;
+  background: linear-gradient(135deg, #27348b, #1f2970);
   color: #f5c800;
   border-radius: 20px;
   padding: 6px 16px;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 700;
   white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(39, 52, 139, 0.2);
 }
 
 .clearBtn {
   background: #fff7ed;
   color: #c2410c;
   border: 1px solid #fed7aa;
-  border-radius: 8px;
+  border-radius: 9px;
   padding: 6px 14px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -78,48 +79,50 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .statCard {
   background: #ffffff;
   border: 1.5px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 12px 18px;
+  border-radius: 14px;
+  padding: 14px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  min-width: 90px;
+  gap: 3px;
+  min-width: 96px;
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .statCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .statCount {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 800;
   line-height: 1;
+  letter-spacing: -1px;
 }
 
 .statLabel {
-  font-size: 11px;
+  font-size: 10.5px;
   color: #6b7280;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
   text-align: center;
+  font-weight: 600;
 }
 
 /* ─── Table ───────────────────────────────────────────────── */
 .tableWrapper {
   background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   overflow-x: auto;
 }
@@ -128,22 +131,22 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 13.5px;
-  min-width: 1200px;
+  min-width: 1150px;
 }
 
 /* Fila de títulos */
 .headerRow {
-  background: #1a3a6b;
+  background: linear-gradient(135deg, #27348b 0%, #1f2970 100%);
 }
 
 .headerRow th {
-  padding: 14px 10px;
+  padding: 15px 10px;
   text-align: left;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10.5px;
+  font-weight: 700;
   color: #f5c800;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.8px;
   white-space: nowrap;
 }
 
@@ -151,23 +154,24 @@
   background: none;
   border: none;
   color: #f5c800;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10.5px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.8px;
   cursor: pointer;
   padding: 0;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   white-space: nowrap;
+  transition: color 0.15s;
 }
 
 .sortBtn:hover {
   color: #ffffff;
 }
 
-/* Fila de filtros */
+/* Fila de filtros — NO modificar colores */
 .filterRow {
   background: #162e56;
 }
@@ -177,7 +181,7 @@
   border-bottom: 2px solid #e5e7eb;
 }
 
-/* Input/select de filtro genérico */
+/* Input/select de filtro — NO modificar colores */
 .fi {
   width: 100%;
   box-sizing: border-box;
@@ -200,7 +204,7 @@
   color: #9ca3af;
 }
 
-/* ─── Badge de días de vencimiento ───────────────────────── */
+/* ─── Badge de vencimiento ────────────────────────────────── */
 .vencimientoBadge {
   display: inline-block;
   padding: 3px 10px;
@@ -211,10 +215,9 @@
   letter-spacing: 0.2px;
 }
 
-/* ─── Header de columnas de fecha ────────────────────────── */
+/* ─── Header columnas de fecha ───────────────────────────── */
 .dateHeaderTh {
   position: relative;
-  /* ancla el popover */
 }
 
 .dateHeaderInner {
@@ -223,7 +226,6 @@
   gap: 6px;
 }
 
-/* Botón calendario (pequeño, junto al sort) */
 .dateFilterBtn {
   width: 22px;
   height: 22px;
@@ -251,22 +253,21 @@
   border-color: #f5c800;
 }
 
-/* Activo: hay un filtro de rango aplicado */
 .dateFilterActive {
   background: #f5c800 !important;
-  color: #1a3a6b !important;
+  color: #27348b !important;
   border-color: #f5c800 !important;
 }
 
-/* ─── Popover de rango de fechas ──────────────────────────── */
+/* ─── Popover rango fechas ────────────────────────────────── */
 .datePopover {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
   z-index: 300;
   background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid #e5e7eb;
   padding: 14px 16px;
   min-width: 210px;
@@ -277,23 +278,16 @@
 }
 
 @keyframes popIn {
-  from {
-    opacity: 0;
-    transform: translateY(-6px) scale(0.97);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .popoverTitle {
-  font-size: 11px;
-  font-weight: 700;
-  color: #1a3a6b;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #27348b;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   border-bottom: 1px solid #f3f4f6;
   padding-bottom: 8px;
   margin-bottom: 2px;
@@ -306,8 +300,8 @@
 }
 
 .popoverField label {
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10.5px;
+  font-weight: 700;
   color: #6b7280;
   text-transform: uppercase;
   letter-spacing: 0.3px;
@@ -315,7 +309,7 @@
 
 .popoverInput {
   border: 1.5px solid #d1d5db;
-  border-radius: 7px;
+  border-radius: 8px;
   padding: 7px 10px;
   font-size: 13px;
   color: #111827;
@@ -327,8 +321,9 @@
 }
 
 .popoverInput:focus {
-  border-color: #1a3a6b;
+  border-color: #27348b;
   background: #fff;
+  box-shadow: 0 0 0 3px rgba(39, 52, 139, 0.08);
 }
 
 .popoverClearBtn {
@@ -361,7 +356,7 @@
 }
 
 .row:hover {
-  background: #f8fafc;
+  background: #f5f7ff;
 }
 
 .table td {
@@ -374,32 +369,33 @@
 .radicadoBtn {
   font-family: ui-monospace, Consolas, monospace;
   font-size: 12.5px;
-  font-weight: 600;
-  color: #1a3a6b;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 6px;
-  padding: 4px 8px;
+  font-weight: 700;
+  color: #27348b;
+  background: #eef0fb;
+  border: 1px solid #c7ccf0;
+  border-radius: 7px;
+  padding: 4px 9px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, border-color 0.15s;
   white-space: nowrap;
 }
 
 .radicadoBtn:hover {
-  background: #dbeafe;
+  background: #dde0f7;
+  border-color: #a5abdf;
 }
 
 .estadoBadge {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 4px 11px;
   border-radius: 20px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
 }
 
 .clienteNombre {
-  font-weight: 600;
+  font-weight: 700;
   color: #111827;
   font-size: 13px;
 }
@@ -415,38 +411,42 @@
   font-size: 13px;
 }
 
-.correoCell {
-  font-size: 12.5px;
-  color: #4b5563;
-}
-
 .fechaCell {
   white-space: nowrap;
   font-size: 13px;
+  color: #4b5563;
 }
 
 .editBtn {
-  background: #1a3a6b;
+  background: linear-gradient(135deg, #27348b, #1f2970);
   color: #ffffff;
   border: none;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 600;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.15s;
+  transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(39, 52, 139, 0.25);
 }
 
 .editBtn:hover {
-  background: #1e4d8c;
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(39, 52, 139, 0.35);
+}
+
+.editBtn:active {
+  transform: translateY(0);
 }
 
 .emptyRow {
   text-align: center;
-  padding: 56px 16px;
+  padding: 64px 16px;
   color: #9ca3af;
   font-size: 14px;
+  font-weight: 500;
 }
 
 /* ─── Loading / Error ─────────────────────────────────────── */
@@ -461,31 +461,28 @@
 }
 
 .spinner {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border: 3px solid #e5e7eb;
-  border-top-color: #1a3a6b;
+  border-top-color: #27348b;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin 0.75s linear infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .errorBox {
   background: #fef2f2;
   border: 1px solid #fecaca;
   color: #dc2626;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 16px 20px;
   font-size: 14px;
   text-align: center;
+  font-weight: 500;
 }
 
-/* ─── Responsive ──────────────────────────────────────────── */
+/* ─── Paginación ──────────────────────────────────────────── */
 .paginationBar {
   margin: 10px 12px 12px;
   display: flex;
@@ -495,57 +492,54 @@
   flex-wrap: wrap;
   background: #f9fafb;
   border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 8px 10px;
+  border-radius: 12px;
+  padding: 9px 12px;
 }
 
 .paginationInfo {
-  font-size: 12px;
-  color: #374151;
+  font-size: 12.5px;
+  color: #4b5563;
   font-weight: 600;
 }
 
 .paginationActions {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   flex-wrap: wrap;
 }
 
 .pageBtn {
-  border: 1px solid #d1d5db;
+  border: 1.5px solid #e5e7eb;
   background: #fff;
-  color: #111827;
-  border-radius: 6px;
-  padding: 5px 9px;
-  font-size: 12px;
+  color: #374151;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .pageBtn:hover:not(:disabled) {
-  background: #eff6ff;
-  border-color: #a5b4fc;
+  background: #eef0fb;
+  border-color: #a5abdf;
+  color: #27348b;
 }
 
 .pageBtn:disabled {
-  opacity: 0.45;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .activePageBtn {
-  background: #1a3a6b;
+  background: linear-gradient(135deg, #27348b, #1f2970);
   color: #fff;
-  border-color: #1a3a6b;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(39, 52, 139, 0.25);
 }
 
 @media (max-width: 768px) {
-  .main {
-    padding: 16px;
-  }
-
-  .pageTitle {
-    font-size: 20px;
-  }
+  .main { padding: 16px; }
+  .pageTitle { font-size: 20px; }
 }

@@ -32,7 +32,7 @@
 
 /* ── Header ── */
 .header {
-  background: #1a3a6b;
+  background: linear-gradient(135deg, #27348b 0%, #1f2970 100%);
   padding: 20px 24px;
   display: flex;
   align-items: flex-start;
@@ -98,7 +98,7 @@
 .sectionTitle {
   font-size: 12px;
   font-weight: 700;
-  color: #1a3a6b;
+  color: #27348b;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   margin: 0 0 4px;
@@ -157,7 +157,7 @@
 }
 
 .closeFooterBtn {
-  background: #1a3a6b;
+  background: #27348b;
   color: #ffffff;
   border: none;
   border-radius: 8px;

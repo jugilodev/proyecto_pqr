@@ -52,7 +52,7 @@ function toISO(fecha) {
 /* ── Estado inicial de filtros ── */
 const INIT_FILTERS = {
     radicado: "", estado: "", tipo: "", canal: "",
-    cliente: "", cedula: "", celular: "", correo: "",
+    cliente: "", cedula: "", celular: "",
     fecha_reporte_desde: "", fecha_reporte_hasta: "",
     fecha_evento_desde: "", fecha_evento_hasta: "",
 }
@@ -150,7 +150,6 @@ export default function Dashboard() {
             txt(`${p.nombre} ${p.apellido}`, filters.cliente) &&
             txt(p.cedula, filters.cedula) &&
             txt(p.celular, filters.celular) &&
-            txt(p.correo, filters.correo) &&
             inRange(p.fecha_reporte, filters.fecha_reporte_desde, filters.fecha_reporte_hasta) &&
             inRange(p.fecha_evento, filters.fecha_evento_desde, filters.fecha_evento_hasta)
         )
@@ -261,7 +260,6 @@ export default function Dashboard() {
                                     <th>Cliente</th>
                                     <th>Cédula</th>
                                     <th>Celular</th>
-                                    <th>Correo</th>
                                     {/* Fecha Reporte: sort + botón popover de rango */}
                                     <th className={styles.dateHeaderTh}>
                                         <div className={styles.dateHeaderInner}>
@@ -388,10 +386,6 @@ export default function Dashboard() {
                                         <input className={styles.fi} type="text" placeholder="Celular..."
                                             value={filters.celular} onChange={e => setFilter("celular", e.target.value)} />
                                     </th>
-                                    <th>
-                                        <input className={styles.fi} type="text" placeholder="Correo..."
-                                            value={filters.correo} onChange={e => setFilter("correo", e.target.value)} />
-                                    </th>
                                     {/* Celdas vacías bajo los encabezados de fecha/vencimiento */}
                                     <th />
                                     <th />
@@ -403,7 +397,7 @@ export default function Dashboard() {
                             <tbody>
                                 {filtradas.length === 0 ? (
                                     <tr>
-                                        <td colSpan="12" className={styles.emptyRow}>
+                                        <td colSpan="11" className={styles.emptyRow}>
                                             No se encontraron PQRs con los filtros aplicados
                                         </td>
                                     </tr>
@@ -436,7 +430,6 @@ export default function Dashboard() {
                                                 </td>
                                                 <td className={styles.monoCell}>{pqr.cedula}</td>
                                                 <td>{pqr.celular}</td>
-                                                <td className={styles.correoCell}>{pqr.correo}</td>
                                                 <td className={styles.fechaCell}>{formatFecha(pqr.fecha_reporte)}</td>
                                                 <td className={styles.fechaCell}>{formatFecha(pqr.fecha_evento)}</td>
                                                 {/* Badge de días restantes (15 días hábiles desde fecha_reporte) */}

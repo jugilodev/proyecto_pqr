@@ -27,7 +27,7 @@
 
 /* ─── Encabezado fijo ───────────────────────────────────────── */
 .drawerHeader {
-  background: #1a3a6b;
+  background: linear-gradient(135deg, #27348b 0%, #1f2970 100%);
   padding: 18px 20px;
   display: flex;
   align-items: center;
@@ -35,6 +35,7 @@
   gap: 12px;
   flex-shrink: 0;
   border-bottom: 3px solid #f5c800;
+  box-shadow: 0 4px 16px rgba(39, 52, 139, 0.25);
 }
 
 .drawerHeaderLeft {
@@ -51,7 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a3a6b;
+  color: #27348b;
   flex-shrink: 0;
 }
 
@@ -137,7 +138,7 @@
 .sectionTitle {
   font-size: 13px;
   font-weight: 700;
-  color: #1a3a6b;
+  color: #27348b;
   margin-bottom: 14px;
   padding-bottom: 10px;
   border-bottom: 2px solid #f5c800;
@@ -197,7 +198,7 @@
 .input:focus,
 .select:focus,
 .textarea:focus {
-  border-color: #1a3a6b;
+  border-color: #27348b;
   box-shadow: 0 0 0 3px rgba(26, 58, 107, 0.08);
   background: #fff;
 }
@@ -242,7 +243,7 @@
 }
 
 .terminosActivo {
-  border-color: #1a3a6b;
+  border-color: #27348b;
   background: #eff6ff;
 }
 
@@ -251,7 +252,7 @@
   height: 16px;
   margin-top: 1px;
   flex-shrink: 0;
-  accent-color: #1a3a6b;
+  accent-color: #27348b;
   cursor: pointer;
 }
 
@@ -265,7 +266,7 @@
 
 .btnPrimary {
   background: linear-gradient(135deg, #f5c800, #e6b800);
-  color: #1a3a6b;
+  color: #27348b;
   border: none;
   border-radius: 9px;
   padding: 11px 28px;
@@ -341,7 +342,7 @@
 }
 
 .radicado {
-  background: #1a3a6b;
+  background: #27348b;
   color: #f5c800;
   border-radius: 12px;
   padding: 16px 28px;
@@ -365,3 +366,71 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* ─── Adjuntar archivos ───────────────────────────────────── */
+.fileInputLabel {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #f0f4f8;
+  border: 1.5px dashed #9ca3af;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  width: fit-content;
+}
+
+.fileInputLabel:hover {
+  border-color: #27348b;
+  background: #eff6ff;
+}
+
+.fileInputHidden { display: none; }
+
+.fileHint {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 4px 0 0;
+}
+
+.fileList {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.fileName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #374151;
+}
+
+.fileRemove {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.fileRemove:hover { color: #dc2626; }

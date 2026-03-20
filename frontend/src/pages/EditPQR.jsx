@@ -73,6 +73,7 @@ export default function EditPQR() {
     /* ── Formulario: agregar bitácora ── */
     const [tipoEventoBit, setTipoEventoBit]   = useState("")
     const [descripcionBit, setDescripcionBit] = useState("")
+    const [archivosBit, setArchivosBit]       = useState([])
     const [loadingBit, setLoadingBit]         = useState(false)
     const [msgBit, setMsgBit]                 = useState(null)
 
@@ -85,7 +86,7 @@ export default function EditPQR() {
                     api.get("/api/catalogos/estados"),
                     api.get("/api/catalogos/tipo_evento"),
                 ])
-                setPqr(resPqr.data)
+                setPqr({ ...resPqr.data, archivos: resPqr.data.archivos || [] })
                 setBitacora(resPqr.data.bitacora || [])
                 setEstados(resEstados.data)
                 setTiposEvento(resTipos.data)
@@ -120,7 +121,7 @@ export default function EditPQR() {
             })
             // Recargar la PQR con el estado actualizado
             const res = await api.get(`/api/pqr/${id}`)
-            setPqr(res.data)
+            setPqr({ ...res.data, archivos: res.data.archivos || [] })
             setBitacora(res.data.bitacora || [])
             setNotaEstado("")
             setMsgEstado({ type: "ok", text: "Estado actualizado correctamente." })
@@ -141,21 +142,30 @@ export default function EditPQR() {
         setLoadingBit(true)
         setMsgBit(null)
         try {
-            await api.post(`/api/pqr/${id}/bitacora`, {
-                id_tipo_evento: parseInt(tipoEventoBit),
-                descripcion: descripcionBit,
+            const formData = new FormData()
+            formData.append("id_tipo_evento", parseInt(tipoEventoBit))
+            formData.append("descripcion", descripcionBit)
+            archivosBit.forEach(archivo => formData.append("archivos", archivo))
+
+            await api.post(`/api/pqr/${id}/bitacora`, formData, {
+                headers: { "Content-Type": "multipart/form-data" }
             })
             // Recargar bitácora
             const res = await api.get(`/api/pqr/${id}`)
             setBitacora(res.data.bitacora || [])
             setTipoEventoBit("")
             setDescripcionBit("")
+            setArchivosBit([])
             setMsgBit({ type: "ok", text: "Entrada agregada a la bitácora." })
         } catch (err) {
             setMsgBit({ type: "error", text: err.response?.data?.message || "Error al agregar la entrada." })
         } finally {
             setLoadingBit(false)
         }
+    }
+
+    const handleQuitarArchivo = (index) => {
+        setArchivosBit(prev => prev.filter((_, i) => i !== index))
     }
 
     /* ── Render de carga / error ── */
@@ -290,6 +300,26 @@ export default function EditPQR() {
                             </div>
                         )}
 
+                        {/* Archivos adjuntos de la PQR */}
+                        {pqr.archivos?.length > 0 && (
+                            <div className={styles.card}>
+                                <h2 className={styles.cardTitle}>Documentos adjuntos</h2>
+                                <div className={styles.adjuntos}>
+                                    {pqr.archivos.map(a => (
+                                        <a
+                                            key={a.id}
+                                            href={`http://localhost:3000${a.ruta_archivo}`}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className={styles.adjuntoDoc}
+                                        >
+                                            {a.tipo_mime?.startsWith("image/") ? "🖼" : "📄"} {a.nombre_original}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
                         {/* Formulario: cambiar estado */}
                         <div className={styles.card}>
                             <h2 className={styles.cardTitle}>Cambiar estado</h2>
@@ -368,6 +398,38 @@ export default function EditPQR() {
                                         onChange={e => setDescripcionBit(e.target.value)}
                                     />
                                 </div>
+
+                                {/* ── Adjuntar archivos ── */}
+                                <div className={styles.field}>
+                                    <label className={styles.label}>Adjuntar archivos (opcional)</label>
+                                    <label className={styles.fileInputLabel}>
+                                        <input
+                                            type="file"
+                                            multiple
+                                            accept="image/*,.pdf,.doc,.docx"
+                                            className={styles.fileInputHidden}
+                                            onChange={e => setArchivosBit(prev => [...prev, ...Array.from(e.target.files)])}
+                                        />
+                                        Seleccionar archivos
+                                    </label>
+                                    <p className={styles.fileHint}>Imágenes, PDF o Word · Máx. 10 MB por archivo</p>
+                                    {archivosBit.length > 0 && (
+                                        <ul className={styles.fileList}>
+                                            {archivosBit.map((f, i) => (
+                                                <li key={i} className={styles.fileItem}>
+                                                    <span className={styles.fileIcon}>{f.type.startsWith("image/") ? "🖼" : "📄"}</span>
+                                                    <span className={styles.fileName}>{f.name}</span>
+                                                    <button
+                                                        type="button"
+                                                        className={styles.fileRemove}
+                                                        onClick={() => handleQuitarArchivo(i)}
+                                                    >✕</button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+
                                 {msgBit && (
                                     <div className={msgBit.type === "ok" ? styles.successMsg : styles.errorMsg}>
                                         {msgBit.text}
@@ -429,6 +491,23 @@ export default function EditPQR() {
                                                 <div className={styles.timelineDesc}>
                                                     {entrada.descripcion}
                                                 </div>
+
+                                                {/* Archivos adjuntos */}
+                                                {entrada.archivos?.length > 0 && (
+                                                    <div className={styles.adjuntos}>
+                                                        {entrada.archivos.map(a => (
+                                                            <a
+                                                                key={a.id}
+                                                                href={`http://localhost:3000${a.ruta_archivo}`}
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                                className={styles.adjuntoDoc}
+                                                            >
+                                                                {a.tipo_mime?.startsWith("image/") ? "🖼" : "📄"} {a.nombre_original}
+                                                            </a>
+                                                        ))}
+                                                    </div>
+                                                )}
 
                                                 {/* Quién registró la gestión */}
                                                 <div className={styles.timelineAutor}>
